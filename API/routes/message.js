@@ -13,15 +13,14 @@ module.exports = function(app, router){
             });
         })
         // To store a message
-        .post(function(req, res){
+        .post(function(req, res){        
             var message = new Message();
             message.userid = req.body.id;
             message.message = req.body.message;
             message.date = new Date();
             
             message.save(function(err){
-                res.send(err);
-                //res.send({success:false, message:'error saving'});
+                res.send({success:false, message:'error saving'});
             });
         });
     
